@@ -1,0 +1,13 @@
+h1, h2, h3, h4, h5, h6 {
+	/* font-family: 'Alegreya SC', serif; */
+	/* font-family: 'Source Serif Pro', serif; */
+	font-family: 'Crimson Text', italic;
+	font-size: 24pt
+}
+p, ul, li, a {
+	/* font-family: 'Crimson Text', serif; */
+	font-family: 'Hind', sans-serif;
+	/* font-family: 'Alegreya', serif; */
+	/* font-family: 'Alegreya Sans', sans-serif; */
+	font-size: 14pt
+}

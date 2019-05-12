@@ -1,0 +1,117 @@
+///////////////////////////////////////////////////////////////////////////////
+// Header Files
+///////////////////////////////////////////////////////////////////////////////
+
+// This is the HTML Pretty Theme that is basic but beautiful
+// common themes are hpstr for a one column layout and leonids for the sidebar with the title
+// The CSS file for the fonts is included below as well
+
+///////////////////////////////////////////////////////////////////////////////
+// Header for the file
+///////////////////////////////////////////////////////////////////////////////
+---
+title: "Stats With Confidence"
+author: "A Stats 250 Tutor Pass-This-Class-And-Kick-Butt Kinda Site"
+# date: "2018-04-16"
+output:
+  prettydoc::html_pretty:
+    theme: hpstr # "cayman", "tactile", "architect", "leonids", and "hpstr"
+    highlight: github
+  #  number_sections: TRUE
+    fig_caption: yes
+    # toc: TRUE
+    <!-- toc: TRUE --> -->
+    <!-- toc_depth: 2 --> -->
+    <!-- number_sections: TRUE --> -->
+    <!-- toc_float: --> -->
+    smooth_scroll: FALSE -->
+    css: style.css
+---
+
+# ```{r setup, include=FALSE}
+# knitr::opts_chunk$set(comment=NA)
+```
+
+<!-- Import the fonts for the document use -->
+<style>
+@import url('https://fonts.googleapis.com/css?family=Alegreya|Alegreya+SC|Alegreya+Sans|Crimson+Text:400,400i|Hind|Source+Serif+Pro');
+</style>
+
+
+///////////////////////////////////////////////////////////////////////////////
+// Accompanying CSS File
+///////////////////////////////////////////////////////////////////////////////
+h1, h2, h3, h4, h5, h6 {
+	/* font-family: 'Alegreya SC', serif; */
+	/* font-family: 'Source Serif Pro', serif; */
+	font-family: 'Crimson Text', italic;
+	font-size: 24pt
+}
+p, ul, li, a {
+	/* font-family: 'Crimson Text', serif; */
+	font-family: 'Hind', sans-serif;
+	/* font-family: 'Alegreya', serif; */
+	/* font-family: 'Alegreya Sans', sans-serif; */
+	font-size: 14pt
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// Read the down theme
+///////////////////////////////////////////////////////////////////////////////
+---
+title: "Stats With Confidence"
+author: "A Stats 250 Tutor Site"
+date: "`r sprintf('Copyright Mark Kurzeja %d', lubridate::year(Sys.Date()))`"
+output:
+  rmdformats::readthedown:
+    highlight: kate
+---
+
+
+```{r knitr_init, echo=FALSE, cache=FALSE}
+suppressWarnings(library(knitr))
+suppressWarnings(library(rmdformats))
+
+## Global options
+options(max.print="75")
+opts_chunk$set(echo=FALSE,
+	             cache=TRUE,
+               prompt=FALSE,
+               tidy=TRUE,
+               comment=NA,
+               message=FALSE,
+               warning=FALSE)
+opts_knit$set(width=75)
+```
+
+///////////////////////////////////////////////////////////////////////////////
+// Material theme
+///////////////////////////////////////////////////////////////////////////////
+---
+title: ""
+date: "`r Sys.Date()`"
+output:
+  rmdformats::material:
+    highlight: kate
+    self_contained: no
+---
+
+
+```{r knitr_init, echo=FALSE, cache=FALSE}
+library(knitr)
+library(rmdformats)
+
+## Global options
+options(max.print="75")
+opts_chunk$set(echo=FALSE,
+	             cache=TRUE,
+               prompt=FALSE,
+               tidy=TRUE,
+               comment=NA,
+               message=FALSE,
+               warning=FALSE)
+opts_knit$set(width=75)
+```
+
+
+

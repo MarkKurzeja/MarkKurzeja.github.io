@@ -1,0 +1,590 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                                                              %
+% Purpose:       Dense Three Column Summary                                    %
+%                                                                              %
+% Author:        Mark Kurzeja                                                  %
+% Contact:       mtkurzej@umich.edu                                            %
+% Client:        Mark Kurzeja                                                  %
+%                                                                              %
+% Code creation: 2015-10-10                                                    %
+%                                                                              %
+% Comment:       Create three column dense info sheets for the presentation o  %
+%                f concise information or to quickly condense a topic or a     %
+%                class into a handout                                          %
+%                                                                              %
+% License:       MIT Open Source License                                       %
+%                                                                              %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[landscape]{article}
+%opening
+\title{}
+\author{}
+\usepackage{multicol}
+% Control the geometry of the page with 1/2 inch margins
+\usepackage[width = 10.5in, height = 8in]{geometry}
+\usepackage{kpfonts}
+%\usepackage{libertine}
+%\renewcommand{\familydefault}{\sfdefault}
+\usepackage{xspace}
+\usepackage{nicefrac}
+\usepackage{amsmath}
+\usepackage{lipsum}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{wasysym} % Fullmoon
+\usepackage{float}
+\usepackage{todonotes}
+\usepackage{booktabs}
+\usepackage{amssymb}
+\usepackage{makecell} % for \makecell{.... \\ .....} for multiline cells
+\usepackage{changepage}   % for the adjustwidth environmen
+\usepackage{siunitx} % For the num operator in producing scientific notation
+\usepackage{multicol}
+
+% For collapsing the lists to a single condensed itemized list
+\usepackage{enumitem}
+\setlist{nosep} % or \setlist{noitemsep} to leave space around whole list
+
+% Specific functions that remove the issues with the spacing around an align enviroment
+\usepackage{etoolbox}
+\newcommand{\zerodisplayskips}{%
+	\setlength{\abovedisplayskip}{2pt}%
+	\setlength{\belowdisplayskip}{2pt}%
+	\setlength{\abovedisplayshortskip}{2pt}%
+	\setlength{\belowdisplayshortskip}{2pt}}
+\appto{\normalsize}{\zerodisplayskips}
+\appto{\small}{\zerodisplayskips}
+\appto{\footnotesize}{\zerodisplayskips}
+
+% ==============================================================================
+% Listings Declaration
+% ==============================================================================
+
+\usepackage{listings} 
+%\lstset{language=R} 
+\usepackage{color}
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\lstset{ %
+	backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+	basicstyle=\scriptsize,        % the size of the fonts that are used for the code
+	breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+	breaklines=true,                 % sets automatic line breaking
+	captionpos=b,                    % sets the caption-position to bottom
+	commentstyle=\color{mygreen},    % comment style
+	deletekeywords={...},            % if you want to delete keywords from the given language
+	escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+	extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+	frame=single,	                   % adds a frame around the code
+	keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+	keywordstyle=\color{blue},       % keyword style
+	language=R,                 % the language of the code
+	otherkeywords={*,...},            % if you want to add more keywords to the set
+	numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+	numbersep=5pt,                   % how far the line-numbers are from the code
+	numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+	rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+	showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+	showstringspaces=false,          % underline spaces within strings only
+	showtabs=false,                  % show tabs within strings adding particular underscores
+	stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
+	stringstyle=\color{mymauve},     % string literal style
+	tabsize=2,	                   % sets default tabsize to 2 spaces
+	title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
+
+% ==============================================================================
+% Commands Declaration
+% ==============================================================================
+
+% A simple figure environment for inserting a picture into the column
+% Arguments:
+% 1: Name of the picture file
+% 2: Caption for the picture
+\newcommand{\qpics}[2]{
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\linewidth]{./#1}
+\label{fig:#1}
+\end{figure}
+}
+
+% Command for creating a very specific spaced hrule that wont interfere with the 
+% text around it
+\newcommand{\myline}{\vspace{4pt}\hrule  \vspace{4pt}}
+
+% Command for breaking the current line of thought into a new column, and placing
+% a new line above the next column
+\newcommand{\mynewcolumn}{\columnbreak \myline}
+
+% Home-made inline bullet points for compact lists
+\newcommand{\mydot}{\ensuremath{\bullet}\xspace} %\ensuremath{\cdot}\xspace}
+
+% Command for inserting a legal blob!
+\newcommand{\legalblob}{\ensuremath{ \left[ \newmoon \right] } \xspace}
+
+% Command that adds a space after the use of an item command in a description 
+% environment
+% Description Environment Item Helper Commands
+\newcommand{\im}[1]{\item[#1] \xspace}
+\newcommand{\imp}[1]{\item[(#1)] \xspace}
+
+% Auto-commas for long nominal and dollar amounts
+\RequirePackage{siunitx}
+\newcommand{\commasep}[1]{\num[group-separator={,}]{#1}}
+\newcommand{\money}[1]{\$\commasep{#1}}
+
+% For mathematical expectations enclosure
+\newcommand{\expt}[1]{\ensuremath{\mathbb{E}\left[ #1\right] }\xspace}
+
+% ==============================================================================
+% The main topic command which is the workhorse of this document
+% Command that allows one to generate topics quickly
+% Arguments:
+% 1: Header for this particular topic
+% 2: Body of the topic
+% ==============================================================================
+
+%\definecolor{brewerred}{HTML}{E41A1C}
+%\definecolor{brewerblue}{HTML}{377EB8}
+%\definecolor{brewergreen}{HTML}{4DAF4A}
+\definecolor{harvardcrimson}{HTML}{A41034}
+%\definecolor{harvardgrey}{HTML}{B6B6B6}
+%\definecolor{harvarddarkgrey}{HTML}{808285}
+\definecolor{harvardblue}{HTML}{0D667F}
+
+\newcommand{\topic}[2]{
+\noindent \textbf{\textsc{\color{harvardcrimson}{#1}}}
+
+\noindent \hspace{-3.5pt}  #2
+
+\myline
+}
+
+% A method for clearing out a topic command without commenting it out
+\newcommand{\ctopic}[2]{} 
+
+% ==============================================================================
+% How to use this document:
+% Use \mynewcolumn to start a new column
+% Use \topic to start another mini topic -> main command
+% Use \ctopic to clear a topic from existence without commenting it
+% Use \mydot to get a bullet figure for quicklists (lists for which you don't 
+%      have a line break)
+% Use \myline to get an hrule in a place that you wish
+% ==============================================================================
+
+% For creating super neat indented sub paragraphs
+\newenvironment{tellme}[1]{
+\noindent \textbf{\textit{\color{harvardblue}{#1}}:}
+%\vspace{-.1cm}
+\begin{adjustwidth}{9pt}{}
+}{
+\end{adjustwidth}
+}
+
+% For creating item enviroments that are flush left with the margin
+\newenvironment{compactitem}{
+\begin{itemize}[leftmargin=*,labelsep=5pt]
+}{
+\end{itemize}
+}
+% For creating enumeration enviroments that are flush left with the margin
+\newenvironment{compactenum}{
+	\begin{enumerate}[leftmargin=*,labelsep=5pt]
+	}{
+	\end{enumerate}
+}
+
+% For creating description enviroments that have a smaller margin
+\newenvironment{compactdesc}{
+	\begin{description}[leftmargin=*,labelsep=10pt]
+	}{
+	\end{description}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                                                              %
+%                                Begin Document                                %
+%                                                                              %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+	\footnotesize
+	
+	% Begin the multicols environment
+	\begin{multicols*}{3}
+		
+		% Making the Title
+		\myline
+		\vspace{-0.15cm}
+		\begin{center}
+			\LARGE \textsc{Stats 250 Final Exam} 
+		\end{center}
+		\vspace{-0.15cm}
+		\myline 
+		
+		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		%                                                                              %
+		%                           How to use this document                           %
+		%                                                                              %
+		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		
+		\topic{Introduction}{
+			This summary is not meant to be comprehensive. By using this document, you acknowledge you have read the disclaimer.
+			\begin{compactdesc}
+				\item[Intrepretations] Look back at Exam One and Exam Two for the interpretations of things like p-values and other vocabulary. Remember to be concise when presenting these on an exam - sometimes saying more than necessary can hurt more than it helps.
+				\item[The Formula Card] Knowing how to quickly utilize the formula card is helpful for many of the problems you may encounter. The notation on the formula card is correct, and a good habit is to always check the formula card whenever you feel you have hit a dead-end. Often, a formula or hint on the card can provide the next step to finish the problem. 
+				\item[Name that scenerio] Being able to identify which test you are looking at quickly and accurately is invaluable. The assumptions, interpretations, distributions, and conclusions all hinge on selecting the correct test, so be sure to study name-that-scenario questions
+				\item[Broad Concepts] The final will test your understanding of broad concepts in this course. Make sure you have a grasp of the big picture as well as the methodology behind each test. 
+%				\item[Remember] To get a good nights sleep and practice taking an exam towards the later part of the day. This is a later exam than most. Be sure to prepare yourself by taking a practice exam around the time of our actual exam. 
+			\end{compactdesc}
+		}
+		
+		
+		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		%                                                                              %
+		%                       Two Independent Mean Differences                       %
+		%                                                                              %
+		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		
+		\topic{Difference in Population Means}{
+			This test compares the means of two independent populations. We say that this is a ``difference in population means'' and not a ``population mean difference''. When you notice that you are comparing two population means and the subgroups have a different size, this is a good indication that you will be using this test and not a paired test. However, this doesn't imply that if the sample sizes are the same that it is automatically a paired test. Make sure to do lots of name-that-scenario to get a good understanding of this distinction.
+			
+			\begin{tellme}{Assumptions}
+				\begin{compactitem}
+					\item $ H_0: \mu_1 = \mu_2 $
+					\item $ H_a: \mu_1 - \mu_2 \neq 0 $
+					\item Random Samples from each \textsc{population} are independent of each other
+					\item Each \textsc{population} is normally distributed (check with TWO QQplots)
+					\item Pooled Test
+					\begin{compactitem}
+						\item Equal Population Variances (checking below)
+					\end{compactitem}
+					\item Unpooled Test
+					\begin{compactitem}
+						\item Unequal Population Variances (checking below)
+					\end{compactitem}
+				\end{compactitem}
+			\end{tellme}
+			
+			\begin{tellme}{QuickFacts}
+				\begin{compactdesc}
+					\item[Distribution of Test Statistic] $ t_{n-1} $
+					\item[Common Mistakes] Not checking variance assumptions, assuming this is a paired test, error using the wrong t-value from the t-table, not using $ n-1 $ degrees of freedom in calculations.
+				\end{compactdesc}
+			\end{tellme}
+			
+			\begin{tellme}{Do we use pooled or unpooled variance?}
+				\begin{compactitem}
+					\item  Population variances equal $\implies$ pooled
+					\item  Population variances unequal $\implies$ unpooled
+					\item  There are three ways of checking equality in variance:
+				\end{compactitem}
+				\begin{compactenum}
+					\item Side-by-Side boxplots
+					\begin{compactitem}
+						\item Are IQRs of the sample data similar?
+						\item Remember, boxes don't need to line up, but lengths of boxes should be similar (within two times the size of each other)
+					\end{compactitem}
+					\item Check on Sample Standard Deviations
+					\begin{compactitem}
+						\item Assumption is valid if sample standard deviations are similar. Each standard deviation is no more than 2x the other. 
+					\end{compactitem}
+					\item \textbf{Levene's test} for homogeneity of variances
+					\begin{compactitem}
+						\item Hypothesis test of equal variances. Use $\boldsymbol{\alpha=0.10}$
+						\item $H_0:\sigma_1^2=\sigma_2^2\text{ v. }H_a:\sigma_1^2\neq\sigma_2^2$
+						\item Reject $H_0\implies$ not reasonable to assume equal variances. You must run an unpooled test (Welch's)
+						\item Fail to reject $\implies$ reasonable to assume equal variances. You can run a pooled test
+					\end{compactitem}
+				\end{compactenum}
+			\end{tellme}
+			
+			\begin{tellme}{Example}
+				Is the mean number of people who progress to AIDS each year in Tanzania different from the mean number of people who progress to AIDS each year in South Africa over the past 10 years?
+				
+				\begin{compactitem}
+					\item There are two independent populations
+					\begin{compactitem}
+						\item Population 1: People who progress to AIDS in \textit{Tanzania}
+						\item Population 2: People who progress to AIDS in \textit{South Africa}
+					\end{compactitem}
+					\item We are comparing the \textit{means} of two populations where
+					\begin{compactitem}
+						\item $\mu_1=$ population mean number of people who progress to AIDS in Tanzania
+						\item $\mu_2 =$ population mean number of people who progress to AIDS in South Africa
+					\end{compactitem}
+				\end{compactitem}
+			\end{tellme}
+			
+			\begin{tellme}{Example}
+				A researcher is curious to find out if study time is higher for older students (group 1) versus younger students (group 2). A sample of 47 older students and 45 younger students was taken. A pooled independent t-test was run and the difference in sample mean, $\bar{X}_1-\bar{X}_2$ was computed. This difference is \textbf{3 standard errors} above the hypothesized difference of 0 for $\mu_1-\mu_2$. 
+				
+				\begin{compactdesc}
+					\item[$H_0:$] $\mu_1-\mu_2=0$
+					\item[$H_a:$] $\mu_1-\mu_2>0$
+					\item[Test statistic value:] $t=3$
+					\item[Pooled t-test df:] $n_1+n_2-2=45+47-2=90$
+				\end{compactdesc}
+			\end{tellme}
+		}
+		
+		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		%                                                                              %
+		%                                Alpha and Beta                                %
+		%                                                                              %
+		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		
+		\topic{Determination of $ \alpha $ and $ \beta $ (Type I \& Type II Error)}{
+			You may get questions on determining $ \alpha $ and $ \beta $ (probability of a type I or type II error), or you may be given two different distributions (think about the homework problem where we had two farmers and we were trying to decide whether a pumpkin belonged to Farmer A or Farmer B). 
+			
+			Always begin by drawing the null and the alternative distributions. They may look something like this 
+			
+			\includegraphics[width=.95\linewidth]{distrsAnno}
+			
+			Note: \textit{They do NOT need to be normally distributed - they can be normal, uniform, or any other distribution}:
+			Most problems will have a decision criteria. They will say, ``Greater than value $ X $ we choose the alternative, else we choose the null''. This $ X $ is the vertical line in the distribution drawn. From here, just think about what each question is asking and how to go about finding the p-values that they are wondering about. 
+		}
+	
+		\mynewcolumn
+		
+		
+		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		%                                                                              %
+		%                              Linear Regression                               %
+		%                                                                              %
+		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		
+		\topic{Linear Regression}{
+			Linear regression is all about finding relationships between a response $ Y $ and a predictor $ X $. 
+			
+			\begin{tellme}{Assumptions}
+				\begin{compactitem}
+					\item There is a linear relationship between the population of responses and the population of the predictor 
+					\item True Errors are Normally Distributed
+					\item True Errors have a constant variance (homoscedasticity)
+				\end{compactitem}
+			\end{tellme}
+			
+			\begin{tellme}{QuickFacts}
+				\begin{compactdesc}
+					\item When we \textbf{extrapolate}, we make a prediction of $y$ for an $x$ that is outside of the range that we fit the data on. Imagine that we are predicting the blood pressure of adult males aged 18-40 using a model. We recruit males aged 18 to 40 and then fit our model, but then we are asked to run this model on a 60 year old male or on a female. These points are outside of our sample, and thus we need to be very careful with predictions from our model. 
+					\item[Distribution of Test Statistic] If the test is a two sided test, we can use either the T Test Statistic on the $ b_1 $coefficient or the F Test Statistic at the bottom of the test. If it is one-sided, we have to use the T Test Statistic. The F-statistic is related to the T Test Statistic by: $ F = t^2 $ 
+					\item[Common Mistakes]  Always be sure to be on the lookout for questions that are testing that you know that \textit{correlation does not imply causation}. Also, always try to write out the form of the regression equation in words - this tends to help out a lot. It is often better to write $Final = b_0 + b_1\times Exam2$ than $\hat{y} = b_0 + b_1x$ to keep them straight on the exam.
+				\end{compactdesc}
+			\end{tellme}
+			
+			\begin{tellme}{Interpreting the R Output and Plots}
+				\includegraphics[width=0.95\linewidth]{routput}	
+			\end{tellme}
+			
+			In this class, our interpretation of $ \beta_1 $ is the true change in mean for the response variable for every additional unit increase in the explanatory variable. $R^2$ is the percent of the variation in the response variable explained by the linear relationship between response and predictor 
+			
+			\begin{compactitem}
+				\item A scatter plot can tell us a lot about the relationship between two variables
+				\item We can view a scatterplot to look for:
+				\begin{compactenum}
+					\item Shape/form
+					\begin{compactitem}
+						\item Linear or non-linear relationship  (does it look like a cup or a rainbow?)
+					\end{compactitem}
+					\item Direction
+					\begin{compactitem}
+						\item Positive or negative correlation
+					\end{compactitem}
+					\item Strength of relationship
+					\begin{compactitem}
+						\item What's the magnitude of the correlation?
+					\end{compactitem}
+					\item Potential Outliers
+					\begin{compactitem}
+						\item Be sure to comment on outliers if you feel there are some
+					\end{compactitem}
+				\end{compactenum}
+				
+			\end{compactitem}
+		}
+		
+		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		%                                                                              %
+		%                                    ANOVA                                     %
+		%                                                                              %
+		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		\mynewcolumn
+		
+		\topic{ANOVA}{
+			Performed when we have $ k $ \textit{independent} populations, and we are trying to test if any of their means differ from one another. This should give you the exact same result as the Tukey test, but it will only provide one p-value instead of each of the pairwise confidence intervals. Note: This test uses an $ F_{k -1, N - k} $ distribution, whereas the Tukey test does not (it uses a special distribution similar to a t-distribution). Always remember the \textsc{Golden Rule}: \textit{Add Down $\rightarrow$ Divide Across} 
+			
+			\begin{tellme}{Hypothesis \& Assumptions}
+				\begin{compactitem}
+					\item $ H_0: \mu_1 = \mu_2 = \cdots = \mu_k $
+					\item $ H_a: \text{at least one of the $ \mu_i $ is different from the others}$
+					\item Each sample is independent of one another
+					\item Each \textit{population} is normally distributed (check with $ k $ QQplots)
+					\item All population variances have to be equal
+				\end{compactitem}
+			\end{tellme}
+			
+			\begin{tellme}{QuickFacts}
+				\begin{compactdesc}
+					\item[Distribution of Test Statistic] \begin{flushleft}
+						$ F_{k -1, N - k} $ Remember - there are two separate degrees of freedom!
+					\end{flushleft} \vspace{-8pt} $$F=\frac{\text{Variation among sample means}}{\text{Variation within groups}}=\frac{\text{MS Groups}}{\text{MSE}}$$
+					\noindent If the null hypothesis is true, then we expect an F-statistic of approximately one. 
+					The larger the $ F $-statistic, the more evidence we have against the hypothesis that all of the means are zero.
+					\item[Common Mistakes] Not checking the variance is equal, not remembering the relationships between $ MSE $ and the standard deviation of the population $ s_p $, table manipulation errors (make sure you know how to compute the table! - see example below). 
+				\end{compactdesc}
+			\end{tellme}
+			
+			% Plot the F - distribution
+			\input{./fdist.tex}
+			
+			\begin{tellme}{Example}
+				\includegraphics[width=\linewidth]{anova_output}
+				\begin{compactitem}
+					\item MSE is 0.2617
+					\item MS Groups is 1.1984
+					\item $F=\frac{1.1984}{0.2617}=4.579$
+					\item $d_1=k-1=3-1=2$
+					\item $d_2=N-k=N-3=18$
+					\item P-value is 0.0247
+				\end{compactitem}
+			\end{tellme}
+			\vspace{1cm}
+			\begin{tellme}{Example}
+				\includegraphics[width=\linewidth]{cool_down}
+				\begin{compactenum}
+					\item We know there are $k=3$ groups, so the numerator degrees of freedom (A) must be: 2
+					\item We divide SS Groups: 2.397 by the numerator df (A) 2 to obtain the MS Groups (B): 1.1984
+					\item We know there are $N=21$ total observations, so the denominator df (C) must be: $N-k=18$
+					\item We divide the SS Error by the denominator df (C) to obtain the MS Error (D) of: 0.2617
+					\item We divide the MS Groups (B): 1.1984 by the MS Error (D) 0.2617 to get the $ F $ statistic: 4.57
+				\end{compactenum} 
+			\end{tellme}
+		}
+		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		%                                                                              %
+		%                                 Chi Squared                                  %
+		%                                                                              %
+		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		
+		\topic{Chi-Squared}{
+			There are three different types of Chi-Squared tests. 
+			\begin{compactitem}
+				\item Test of Independence
+				\item Test of Homogeneity
+				\item Goodness of Fit
+			\end{compactitem}
+			Each test uses the same test statistic given by: 
+			\begin{align*}
+			\chi^{2} = \sum\limits_{i = 1}^{n} \frac{(\text{Observed} - \text{Expected})^{2}}{\text{Expected}} \,\, {\bigg \vert} \,\, \text{Contribution} = \frac{(\text{Obs} - \text{Exp})^{2}}{\text{Exp}} 
+			\end{align*}
+			The further away our observation is away from what we would expect, the larger the test statistic.
+			
+			\begin{tellme}{Discerning the Three Types of Tests}
+				\begin{compactdesc}
+					\item[Goodness of Fit]  
+					This test answers the question, ``Do the data fit well compared to a specified distribution?'' It considers one categorical response, and assesses whether the proportion of sampled observations falling into each category matches well to a specified distribution. The null hypothesis specifies this distribution which describes the population proportion of observations in each category.
+					%	There is one population and one categorical variable.
+					Ex: Imagine that one grabs a bag of MM's. MM's lists the color distribution as: According to it, each package of Milk Chocolate M\&M’s should contain 24\% blue, 14\% brown, 16\% green, 20\% orange, 13\% red, and 14\% yellow M\&M’s. We could take a few packs of MM's and compare our observed percentages to what we would expect to see if we are getting results consistent with MM's website. 
+					
+					\item[Test of Homogeneity] 
+					This test answers the question, ``Do two or more populations have the same distribution for one categorical variable?''  It considers one categorical response, and assesses whether the model for this response is the same in two (or more) populations. The null hypothesis is that the distribution of the categorical variable is the same for the two (or more) populations.
+					%	We have one categorical variable and two or more populations.
+					Ex. I have five TV shows and I am trying to see if each of the proportions of men and women are the same across the five shows. 
+					
+					\item[Test of Independence] This test answers the question, ``Are two factors (or variables) independent for a population under study?'' It considers two categorical variables (sometimes one is a response and the other is explanatory), and assesses whether there appears to be a relationship between these two variables for a single population. The null hypothesis is that the two categorical variables are independent (not related) for the population of interest. 
+					%	We have two categorical variables and one population. 
+					Ex: Imagine that I was trying to determine if someones school year (Freshman, Sophomore, Junior, Senior), is independent of where they live on campus (in the dorms, off campus, at home, fraternity / sorority) 
+				\end{compactdesc}
+			\end{tellme}
+			
+			\begin{tellme}{Variables and Populations}
+				\begin{center}
+					\begin{tabular}{ccc}
+						\toprule
+						\textbf{Test} & \textbf{Number of Variables} & \textbf{Number of Populations} \\ 
+						\midrule
+						Goodness of Fit & 1 & 1 \\ 
+						Homogeneity & 1 & 2+ \\ 
+						Independence & 2 & 1\\
+						\bottomrule
+					\end{tabular} 
+				\end{center}
+			\end{tellme}
+			
+			\vspace{4mm}
+			\newcommand{\varfil}[1]{\ensuremath{\langle #1 \rangle}\xspace}
+			\begin{tellme}{Null Hypothesis}
+				\begin{compactdesc}
+					\item[Goodness of Fit] \begin{flushleft}
+						$ H_0: $ $ p_1 = \varfil{PopulationProp_1} $, $ p_2 = \varfil{PopulationProp_2} $, \ldots, $ p_k = \varfil{PopulationProp_k} $.
+					\end{flushleft}
+					\item[Homogeneity] $ H_0: $ The distribution of \varfil{VariableNames} is the same for populations of \varfil{Names of the Populations}
+					\item[Independence] $ H_0: $ There is no relationship between \varfil{Variable1} and \varfil{Variable2}
+				\end{compactdesc}
+			\end{tellme}
+			
+			\begin{tellme}{Independence vs. Homogeneity}
+				You'll see that the test for independence and homogeneity are easily confused. Some quick tips:
+				\begin{compactitem}
+					\item Check the sampling method and the problem setup
+					\item In tests for Homogeneity, we have two or more populations and only one variable. In independence testing we have one population and more than one variable.
+					\item In tests for Homogeneity, we have two or more samples. In independence tests, we have one sample and record two variables
+					\item In tests for Homogeneity, the question is asking if the populations are \textit{different}. In tests for independence, we are asking if the \textit{variables} are \textit{independent} or \textit{associated}
+					\item What if...
+					\begin{compactitem}
+						\item I took a random sample of wedding guests and recorded if they were from the bride’s side or the groom’s side and what type of meal they wanted. (Independence)
+						\item I took a random sample of wedding guests from the bride’s side and a second random sample from the groom’s side and recorded what type of meal they wanted. (Homogeneity)
+					\end{compactitem}
+				\end{compactitem}
+			\end{tellme}
+			
+			\begin{tellme}{The Chi-Squared Distribution}
+				
+				\input{./chidist.tex}
+				
+%				With degrees of freedom:
+%				\begin{center}
+%					\begin{tabular}{cc}
+%						\toprule
+%						Test & Degrees of Freedom  \\
+%						\midrule 
+%						Independence & $ (\text{rows} - 1) \times (\text{columns} - 1) $ \\ 
+%						Homogeneity & $ (\text{rows} - 1) \times (\text{columns} - 1) $ \\ 
+%						Goodness of Fit & $ \text{Number of Categories} - 1 $\\
+%						\bottomrule
+%					\end{tabular} 
+%				\end{center}
+
+			\end{tellme}
+		
+		
+		}
+	
+		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		%                                                                              %
+		%                                 Disclaimer                                   %
+		%                                                                              %
+		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		\topic{Disclaimer}{ \tiny
+			Mark has made every attempt to ensure the accuracy and reliability of the information provided in this study material. However, the information is provided "as is" without warranty of any kind. Mark does not accept any responsibility or liability for the accuracy, content, completeness, legality, or reliability of the information contained in this study material.
+			No warranties, promises and/or representations of any kind, expressed or implied, are given as to the nature, standard, accuracy, content, completeness, reliability, or otherwise of the information provided in this study material nor to the suitability or otherwise of the information to Stats 250. 
+			\begin{center}
+				Version: 1.618\\
+				Please email typos to \texttt{mtkurzej@umich.edu}\\		
+				Copyright Mark Kurzeja 2019		
+%				Released under License: Attribution-NonCommerical-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
+			\end{center}
+			
+			
+		}
+
+	\end{multicols*}
+\end{document}
+
