@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6840 64-bit) (preloaded format=pdflatex 2018.11.11)  11 MAY 2019 19:17
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6840 64-bit) (preloaded format=pdflatex 2018.11.11)  11 MAY 2019 23:10
 entering extended mode
 **"./Stats 250 First Exam One Pager.tex"
 ("Stats 250 First Exam One Pager.tex"
@@ -1582,16 +1582,26 @@ LaTeX Font Info:    Try loading font information for TS1+jkp on input line 265.
 
 ("C:\Users\mtkur\AppData\Local\Programs\MiKTeX 2.9\tex\latex\kpfonts\ts1jkp.fd"
 File: ts1jkp.fd 2007/08/30 Fontinst v1.928 font definitions for TS1/jkp.
-) [1
+)
+Overfull \hbox (3.88133pt too wide) in paragraph at lines 326--327
+[]
+ []
 
-{C:/Users/mtkur/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
+
+Underfull \hbox (badness 10000) in paragraph at lines 328--329
+[]\OT1/jkp/m/n/8 We
+ []
+
+[1
+
+{C:/Users/mtkur/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}] [2]
 ("Stats 250 First Exam One Pager.aux") ) 
 Here is how much of TeX's memory you used:
- 28902 strings out of 492970
- 569368 string characters out of 3126593
- 836740 words of memory out of 3000000
+ 28904 strings out of 492970
+ 569381 string characters out of 3126593
+ 850740 words of memory out of 3000000
  32335 multiletter control sequences out of 15000+200000
- 569772 words of font info for 108 fonts, out of 3000000 for 9000
+ 570543 words of font info for 110 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  62i,17n,66p,830b,455s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Users/mtkur/AppData/Local/Programs/
@@ -1610,9 +1620,10 @@ l/Programs/MiKTeX 2.9/fonts/type1/public/kpfonts/jkpsy.pfb><C:/Users/mtkur/AppD
 ata/Local/Programs/MiKTeX 2.9/fonts/type1/public/kpfonts/jkpsyc.pfb><C:/Users/m
 tkur/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/kpfonts/jkpttmn8a.pfb
 >
-Output written on "Stats 250 First Exam One Pager.pdf" (1 page, 97083 bytes).
+Output written on "Stats 250 First Exam One Pager.pdf" (2 pages, 108020 bytes).
+
 PDF statistics:
- 55 PDF objects out of 1000 (max. 8388607)
+ 58 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 

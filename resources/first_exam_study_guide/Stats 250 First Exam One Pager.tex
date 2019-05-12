@@ -278,7 +278,10 @@
 		Something \textit{cannot} be both mutually exclusive and independent! 
 	\end{topic} 	
 	\begin{topic}{Probability Example}
-		Let's imagine that we saw the following on the exam: ``The probability of it raining is 30\%. The probability of you not smiling is 20\%. The probability of it raining or you smiling is 50\%.''
+		Let's imagine that we saw the following on the exam: 
+		\begin{quote}
+			The probability of it raining is 30\%. The probability of you not smiling is 20\%. The probability of it raining or you smiling is 50\%.
+		\end{quote}
 		\begin{compactdesc}
 			\item[Problem Setup] First thing's first: always set up the problem by putting labels to things! We will let $ A = \text{Probability of it Raining} $ and $ B = \text{Probability of you smiling} $
 			\item[Writing out the problem in Symbols] This step makes things a lot easier since we can now use our formula card
@@ -308,6 +311,85 @@
 		\end{compactdesc}
 	\end{topic}
 	
+	\begin{topic}{Binomial Example}
+		Lets go over how a binomial problem shows up on the exam. 
+		\begin{quote}
+			You are watching CSPAN because you are into politics and you find out (to your surprise) that only 3\% of Americans watch CSPAN. You're wondering what the probability that at least one of your neighbors watches CSPAN so you can watch it with them. Assume you have 25 neighbors.
+		\end{quote}
+		\begin{compactdesc}
+			\item[Why is this a Binomial Problem?]
+			\begin{compactenum}
+				\item Binary Choice - Each neighbor either watches CSPAN or does not. These are the only two choices
+				\item Fixed $ p $ - We assume that the probability of one neighbor watching CSPAN is the same as any other neighbor
+				\item Fixed $ n $ - We have a total of 25 neighbors and this doesn't change
+			\end{compactenum} 
+			\item[What is the probability that if you have one neighbor they watch CSPAN?] This is given in the problem. This is 3\%
+			\item[What is the probability that exactly 4 people watch CSPAN] We are looking for $ P(X = 4) $ i.e. four of our neighbors watch CSPAN. $ X $ is distributed binomial with $ n = 25 $ and $ p = 0.03 $ which can also be written $ X \sim Binomial(n = 25, p = 0.03) $. We can use the formula card to see that $ P(X = 4) = \binom{25}{4} 4^{0.03} 21^{0.97} = 0.00540$
+			\item[What is the probabilty that at least one neighbor watches CSPAN?] We are looking for $ P(X \geq 1) = P(X = 1) + P(X = 2) + \cdots + P(X = 25)$. Probabilities sum to one, so we can rewrite this as: $ P(X\geq 1) = 1 - P(X = 0) $. Lets find the probability that $ P(X = 0) $. Using the Binomial formula:
+			\begin{align*}
+			P(X\geq 1) &= 1 - P(X = 0)\\
+			P(X\geq 1) &= 1 - \binom{25}{0} 0^{0.03} 25^{0.97}\\
+			P(X\geq 1) &= 1 - 0.4669747\\
+			P(X\geq 1) &= 0.5330253\\
+			\end{align*}  
+			\item[What is the expected number of neighbors that watch CSPAN?] The ``expected value'' of a binomial is another way of asking for the mean. The mean of the binomial is also given on the formula card: $ E[X] = np = 25\times 0.03 = 0.75 $ people on average. 
+		\end{compactdesc}
+	\end{topic}
+	
+	\begin{topic}{One Proportion Test Assumptions}
+		Let's go through a One Proportion problem in all of the ways that it can play out:
+		\begin{quote}
+			Imagine that your friend says that only 70\% of people in Ann Arbor love dogs. You think this is too low so you decide to run a test
+		\end{quote}
+		Statement: $ H_0: p = 0.7, H_a: p > 0.7 $ where $ p $ is the population proportion of UofM students who love dogs. Lets look at two different scenerios:
+	
+		\begin{compactitem}
+			\item Imagine that you poll 100 people and 90 of them say they love dogs. We first check assumptions:
+			\begin{center}
+				\begin{tabular}{cccc}
+					State & Check & Values & $ \geq 10 $ \\
+					\midrule
+					$ np \geq 10 $    &    $ np_0 \geq 10 $   &    $ 100 \times 0.7 $    &      True      \\
+					$ n(1-p) \geq 10 $    &    $ n(1-p_0) \geq 10 $   &     $ 100 \times (1-0.7) $   & True
+				\end{tabular}
+			\end{center}
+			and since our assumptions are satisfied, we can proceed with the Large Sample Z Test:
+			\begin{align*}
+			X &\sim Binomial(n = 100, p = 0.7) \text{ (in reality)}\\
+			X &\approx N(\mu = 0.7, \sigma = \sqrt{\nicefrac{1}{100} (0.7)(1-0.7)}) \text{ (Approximation)}\\
+			Z &\sim N(0,1) \text{ (Distribution of Test Statistic)}\\
+			Z &= \frac{\hat{p} - p_0}{\sqrt{\frac{p_0(1- p_0)}{n}}} = \frac{0.9 - 0.7}{\sqrt{\frac{0.7(1-0.7)}{100}}} = 95.23\\
+			P(Z > 95.23) &= \text{ by our z-table } \approx 0 
+			\end{align*}
+			\item Now, imagine instead that you only decided to poll 20 people and 18 say they love dogs:
+			\begin{center}
+				\begin{tabular}{cccc}
+					State & Check & Values & $ \geq 10 $ \\
+					\midrule
+					$ np \geq 10 $    &    $ np_0 \geq 10 $   &    $ 20 \times 0.7 $    &      True      \\
+					$ n(1-p) \geq 10 $    &    $ n(1-p_0) \geq 10 $   &     $ 20 \times (1-0.7) $   & False
+				\end{tabular}
+			\end{center}
+			Our assumption is not satisfied. So we need to use the binomial distribution to compute the p-value. 
+			\begin{align*}
+				X &\sim Binomial(n = 20, p = 0.7)\\
+				P(X \geq 18) &= P(X = 18) + P(X = 19) + P(X = 20)\\
+				\intertext{which by the binomial formula is:}
+				P(X \geq 18) &= \binom{20}{18} 18^{0.7} 2^{0.3} + \binom{20}{19} 19{0.7} 1^{0.3} + \binom{20}{20} 20^{0.7} 0^{0.3}\\
+				P(X \geq 18) &= 0.03548313
+			\end{align*}
+			and this will now be our p-value.
+		\end{compactitem}
+	\end{topic}
+	
+	\begin{topic}{}
+		
+	\end{topic}
+	
+	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	% Disclaimer
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\begin{topic}{Disclaimer} \tiny
 		Mark has made every attempt to ensure the accuracy and reliability of the information provided in this study material. However, the information is provided "as is" without warranty of any kind. Mark does not accept any responsibility or liability for the accuracy, content, completeness, legality, or reliability of the information contained in this study material.
 		No warranties, promises and/or representations of any kind, expressed or implied, are given as to the nature, standard, accuracy, content, completeness, reliability, or otherwise of the information provided in this study material nor to the suitability or otherwise of the information to Stats 250. 
