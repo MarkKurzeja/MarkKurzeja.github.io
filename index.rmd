@@ -103,14 +103,15 @@ knitr::kable(dat) %>%
   column_spec(2, width = "30em")
 ```
 
-
+# *Exam Study Materials*
+Looking for study materials and practice questions? Sign up for one of our tutoring sessions, and they are included for free!
 
 # *Study Guides*
 
-There are three exams in the course which comprise up to 80% of your grade so studying for them is the first priority. The first and the second exam study guide are free and are for your use. The final exam study guide is only $3.99 and is yours to keep. If you sign up for a tutoring session with us, the final exam one pager is free with your session!
+There are three exams in the course which comprise up to 80% of your grade so studying for them is the first priority. The first and the second exam study guide are free and are for your use. If you would like them, reach out to [mark@statswithconfidence.com](mailto:mark@statswithconfidence.com) if you would like them! The final exam study guide is only $3.99 and is yours to keep. If you sign up for a tutoring session with us, the final exam one pager is free with your session!
 
-* [First Exam Study Guide](https://www.example.com)
-* [Second Exam Study Guide](https://www.example.com)
+<!-- * [First Exam Study Guide](https://www.example.com) -->
+<!-- * [Second Exam Study Guide](https://www.example.com) -->
 * You can purchase the final exam study guide here: [Final Exam Study Guide](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=LAEV5FXPUPC2Y)
 
 *If you use paypal, the download will begin as soon as you are done checking out. If you don't have a PayPal, we accept Venmo (`@MarkKurzeja`) because we know you're college kids just like us and that's easy too. If you pay via Venmo, I'll send it to you via email within 24 hours :)*
@@ -141,6 +142,10 @@ Seeing is believing. Look into the Central Limit Theorem, Type I and Type II Err
 <!-- * [Lab 4 - Two Proportions](https://www.example.com) -->
 <!-- * [Lab 5 - CLT](https://www.example.com) -->
 
+<!-- ========================= -->
+<!-- Google Analytics Script -->
+<!-- ========================= -->
+<script> (function(i,s,o,g,r,a,m){ i['GoogleAnalyticsObject']=r; i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)}, i[r].l=1*new Date(); a=s.createElement(o),m=s.getElementsByTagName(o)[0]; a.async=1; a.src=g; m.parentNode.insertBefore(a,m) })(window,document,'script','//www.google-analytics.com/analytics.js','ga'); ga('create', 'UA-140003637-1', 'auto'); ga('send', 'pageview'); </script>
 
 
 <!-- ========================= -->
