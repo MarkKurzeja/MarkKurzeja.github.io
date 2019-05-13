@@ -108,10 +108,10 @@ Looking for study materials and practice questions? Sign up for one of our tutor
 
 # *Study Guides*
 
-There are three exams in the course which comprise up to 80% of your grade so studying for them is the first priority. The first and the second exam study guide are free and are for your use. If you would like them, reach out to [mark@statswithconfidence.com](mailto:mark@statswithconfidence.com) if you would like them! The final exam study guide is only $3.99 and is yours to keep. If you sign up for a tutoring session with us, the final exam one pager is free with your session!
+There are three exams in the course which comprise up to 80% of your grade so studying for them is the first priority. The first and the second exam study guide are free and the links for download are below. The final exam study guide is only $3.99 and is yours to keep. If you sign up for a tutoring session with us, the final exam one pager is free with your session! Email [mark@StatsWithConfidence.com](mailto:mark@StatsWithConfidence.com) if you have any questions!
 
-<!-- * [First Exam Study Guide](https://www.example.com) -->
-<!-- * [Second Exam Study Guide](https://www.example.com) -->
+* Click here to download: [First Exam Study Guide](https://github.com/MarkKurzeja/MarkKurzeja.github.io/raw/master/resources/first_exam_study_guide/Stats%20250%20First%20Exam%20One%20Pager.pdf) *This is still under construction*
+* Click here to download: [Second Exam Study Guide](https://github.com/MarkKurzeja/MarkKurzeja.github.io/raw/master/resources/second_exam_study_guide/Stats%20250%20Second%20Exam%20One%20Pager.pdf) *This is still under construction*
 * You can purchase the final exam study guide here: [Final Exam Study Guide](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=LAEV5FXPUPC2Y)
 
 *If you use paypal, the download will begin as soon as you are done checking out. If you don't have a PayPal, we accept Venmo (`@MarkKurzeja`) because we know you're college kids just like us and that's easy too. If you pay via Venmo, I'll send it to you via email within 24 hours :)*

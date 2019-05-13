@@ -1,0 +1,286 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                                                              %
+% Purpose:       Dense Three Column Summary                                    %
+%                                                                              %
+% Author:        Mark Kurzeja                                                  %
+% Contact:       mtkurzej@umich.edu                                            %
+% Client:        Mark Kurzeja                                                  %
+%                                                                              %
+% Code creation: 2015-10-10                                                    %
+%                                                                              %
+% Comment:       Create three column dense info sheets for the presentation o  %
+%                f concise information or to quickly condense a topic or a     %
+%                class into a handout                                          %
+%                                                                              %
+% License:       MIT Open Source License                                       %
+%                                                                              %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[landscape]{article}
+
+% Opening
+\title{}
+\author{}
+
+% Packages
+\usepackage{multicol}
+% Control the geometry of the page with 1/2 inch margins
+\usepackage[width = 10.5in, height = 8in]{geometry}
+\usepackage{xspace}
+\usepackage{nicefrac}
+\usepackage{amsmath}
+\usepackage{lipsum}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{wasysym} % Fullmoon
+\usepackage{float}
+\usepackage{todonotes}
+\usepackage{booktabs}
+\usepackage{amssymb}
+\usepackage{makecell} % for \makecell{.... \\ .....} for multiline cells
+\usepackage{changepage}   % for the adjustwidth environmen
+\usepackage{siunitx} % For the num operator in producing scientific notation
+\usepackage{multicol}
+
+% Fonts selection
+\usepackage[]{kpfonts}
+%\usepackage[regular, default]{sourcesanspro} % Very close to Myriad - favorite sans serif % option light,scale
+%\usepackage{alegreya}
+%\usepackage[sfdefault]{universalis}
+%\usepackage{ebgaramond}
+%\usepackage{accanthis}
+%\usepackage{libertine}
+%\renewcommand{\familydefault}{\sfdefault}
+
+% ==============================================================================
+% Listings Declaration
+% ==============================================================================
+
+\usepackage{listings} 
+%\lstset{language=R} 
+\usepackage{color}
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\lstset{ %
+	backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+	basicstyle=\scriptsize,        % the size of the fonts that are used for the code
+	breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+	breaklines=true,                 % sets automatic line breaking
+	captionpos=b,                    % sets the caption-position to bottom
+	commentstyle=\color{mygreen},    % comment style
+	deletekeywords={...},            % if you want to delete keywords from the given language
+	escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+	extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+	frame=single,	                   % adds a frame around the code
+	keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+	keywordstyle=\color{blue},       % keyword style
+	language=R,                 % the language of the code
+	otherkeywords={*,...},            % if you want to add more keywords to the set
+	numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+	numbersep=5pt,                   % how far the line-numbers are from the code
+	numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+	rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+	showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+	showstringspaces=false,          % underline spaces within strings only
+	showtabs=false,                  % show tabs within strings adding particular underscores
+	stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
+	stringstyle=\color{mymauve},     % string literal style
+	tabsize=2,	                   % sets default tabsize to 2 spaces
+	title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
+
+% ==============================================================================
+% Commands Declaration
+% ==============================================================================
+
+% For collapsing the lists to a single condensed itemized list
+\usepackage{enumitem}
+\setlist{nosep} % or \setlist{noitemsep} to leave space around whole list
+
+% Specific functions that remove the issues with the spacing around an align enviroment
+\usepackage{etoolbox}
+\newcommand{\zerodisplayskips}{
+	\setlength{\abovedisplayskip}{2pt}
+	\setlength{\belowdisplayskip}{2pt}
+	\setlength{\abovedisplayshortskip}{2pt}
+	\setlength{\belowdisplayshortskip}{2pt}
+}
+\appto{\normalsize}{\zerodisplayskips}
+\appto{\small}{\zerodisplayskips}
+\appto{\footnotesize}{\zerodisplayskips}
+
+% A simple figure environment for inserting a picture into the column
+% Arguments:
+% 1: Name of the picture file
+% 2: Caption for the picture
+\newcommand{\qpics}[2]{
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.6\linewidth]{./#1}
+		\label{fig:#1}
+	\end{figure}
+}
+
+% Command for creating a very specific spaced hrule that wont interfere with the 
+% text around it
+\newcommand{\myline}{\vspace{4pt}\hrule  \vspace{4pt}}
+
+% Command for breaking the current line of thought into a new column, and placing
+% a new line above the next column
+\newcommand{\mynewcolumn}{\columnbreak \myline}
+
+% Home-made inline bullet points for compact lists
+\newcommand{\mydot}{\ensuremath{\bullet}\xspace} %\ensuremath{\cdot}\xspace}
+
+% Command for inserting a legal blob!
+\newcommand{\legalblob}{\ensuremath{ \left[ \newmoon \right] } \xspace}
+
+% Command that adds a space after the use of an item command in a description 
+% environment
+% Description Environment Item Helper Commands
+\newcommand{\im}[1]{\item[#1] \xspace}
+\newcommand{\imp}[1]{\item[(#1)] \xspace}
+
+% Auto-commas for long nominal and dollar amounts
+\RequirePackage{siunitx}
+\newcommand{\commasep}[1]{\num[group-separator={,}]{#1}}
+\newcommand{\money}[1]{\$\commasep{#1}}
+
+% For mathematical expectations enclosure
+\newcommand{\expt}[1]{\ensuremath{\mathbb{E}\left[ #1\right] }\xspace}
+
+% ==============================================================================
+% The main topic command which is the workhorse of this document
+% Command that allows one to generate topics quickly
+% Arguments:
+% 1: Header for this particular topic
+% 2: Body of the topic
+% ==============================================================================
+
+\definecolor{harvardcrimson}{HTML}{A41034} % For the main headings
+\definecolor{harvardblue}{HTML}{0D667F} % For the sub headings
+%\definecolor{brewerred}{HTML}{E41A1C}
+%\definecolor{brewerblue}{HTML}{377EB8}
+%\definecolor{brewergreen}{HTML}{4DAF4A}
+%\definecolor{harvardgrey}{HTML}{B6B6B6}
+%\definecolor{harvarddarkgrey}{HTML}{808285}
+
+% ==============================================================================
+% How to use this document:
+% Use \mynewcolumn to start a new column
+% Use \topic to start another mini topic -> main command
+% Use \ctopic to clear a topic from existence without commenting it
+% Use \mydot to get a bullet figure for quicklists (lists for which you don't 
+%      have a line break)
+% Use \myline to get an hrule in a place that you wish
+% ==============================================================================
+
+% Main command for creating a topic which is the main unit of parsing 
+\newenvironment{topic}[1]{
+	\noindent \textbf{\textsc{\color{harvardcrimson}{#1}}}
+	\noindent \hspace{-3.5pt}
+}{
+	\myline
+}
+
+% A method for clearing out a topic command without commenting it out
+\newenvironment{ctopic}[1]{
+}{
+}
+
+% For creating super neat indented sub paragraphs
+\newenvironment{tellme}[1]{
+	\noindent \textbf{\textit{\color{harvardblue}{#1}}}
+	\begin{adjustwidth}{9pt}{}
+	}{
+	\end{adjustwidth}
+}
+
+% For creating item enviroments that are flush left with the margin
+\newenvironment{compactitem}{
+	\begin{itemize}[leftmargin=*,labelsep=5pt]
+	}{
+	\end{itemize}
+}
+% For creating enumeration enviroments that are flush left with the margin
+\newenvironment{compactenum}{
+	\begin{enumerate}[leftmargin=*,labelsep=5pt]
+	}{
+	\end{enumerate}
+}
+
+% For creating description enviroments that have a smaller margin
+\newenvironment{compactdesc}{
+	\begin{description}[leftmargin=1em,labelsep=0.7em, font=\normalfont\itshape]
+	}{
+	\end{description}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                                                              %
+%                                Begin Document                                %
+%                                                                              %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+	\footnotesize
+
+	% Begin the multicols environment
+	\begin{multicols*}{3}
+	% Make the title align with the rest of the columns
+	\hfill
+	\vspace{-1\baselineskip}
+	\hfill
+	
+	% Making the Title
+	\myline
+	\vspace{-0.2cm}
+	\begin{center}
+		\LARGE \textsc{Second Exam Study Guide} 
+	\end{center}
+	\vspace{-0.2cm}
+	\myline 
+	
+	% Template for a new topic
+		
+	\begin{topic}{Introduction}
+		This summary is not meant to be comprehensive. By using this document, you acknowledge you have read the disclaimer.
+		\begin{compactdesc}
+			\item[Intrepretations] Look back at Exam One and Exam Two for the interpretations of things like p-values and other vocabulary. Remember to be concise when presenting these on an exam - sometimes saying more than necessary can hurt more than it helps.
+			\item[The Formula Card] Knowing how to quickly utilize the formula card is helpful for many of the problems you may encounter. The notation on the formula card is correct, and a good habit is to always check the formula card whenever you feel you have hit a dead-end. Often, a formula or hint on the card can provide the next step to finish the problem. 
+			\item[Name that scenerio] Being able to identify which test you are looking at quickly and accurately is invaluable. The assumptions, interpretations, distributions, and conclusions all hinge on selecting the correct test, so be sure to study name-that-scenario questions
+			\item[Broad Concepts] The final will test your understanding of broad concepts in this course. Make sure you have a grasp of the big picture as well as the methodology behind each test. 
+			\item[Remember] To get a good nights sleep and practice taking an exam towards the later part of the day. This is a later exam than most. Be sure to prepare yourself by taking a practice exam around the time of our actual exam. 
+		\end{compactdesc}
+	\end{topic}
+	
+	
+	
+	\begin{topic}{}
+		
+	\end{topic}
+	
+	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	% Disclaimer
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\begin{topic}{Disclaimer} \tiny
+		Mark has made every attempt to ensure the accuracy and reliability of the information provided in this study material. However, the information is provided "as is" without warranty of any kind. Mark does not accept any responsibility or liability for the accuracy, content, completeness, legality, or reliability of the information contained in this study material.
+		No warranties, promises and/or representations of any kind, expressed or implied, are given as to the nature, standard, accuracy, content, completeness, reliability, or otherwise of the information provided in this study material nor to the suitability or otherwise of the information to Stats 250. 
+		\begin{center}
+			Version: 1.618\\
+			Please email typos to \texttt{mtkurzej@umich.edu}\\
+			Copyright Mark Kurzeja 2019				
+%			Released under License: Attribution-NonCommerical-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
+		\end{center}
+	
+	
+	\end{topic}
+
+		
+
+\end{multicols*}
+\end{document}
