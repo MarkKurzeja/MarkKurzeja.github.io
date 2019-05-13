@@ -1,7 +1,7 @@
 This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6840 64-bit) (preloaded format=pdflatex 2018.11.11)  13 MAY 2019 01:25
 entering extended mode
-**"./Stats 250 First Exam One Pager.tex"
-("Stats 250 First Exam One Pager.tex"
+**"./Stats 250 Second Exam One Pager.tex"
+("Stats 250 Second Exam One Pager.tex"
 LaTeX2e <2018-04-01> patch level 5
 ("C:\Users\mtkur\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\article.cls"
 Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
@@ -1361,8 +1361,8 @@ Package: enumitem 2011/09/28 v3.5.2 Customized lists
 sty"
 Package: etoolbox 2018/08/19 v2.5f e-TeX tools for LaTeX (JAW)
 \etb@tempcnta=\count331
-) ("Stats 250 First Exam One Pager.aux")
-\openout1 = `"Stats 250 First Exam One Pager.aux"'.
+) ("Stats 250 Second Exam One Pager.aux")
+\openout1 = `"Stats 250 Second Exam One Pager.aux"'.
 
 LaTeX Font Info:    Checking defaults for OML/jkp/m/it on input line 227.
 LaTeX Font Info:    Try loading font information for OML+jkp on input line 227.
@@ -1576,54 +1576,29 @@ LaTeX Font Info:    Try loading font information for OT1+jkptt on input line 22
 ("C:\Users\mtkur\AppData\Local\Programs\MiKTeX 2.9\tex\latex\kpfonts\ot1jkptt.f
 d"
 File: ot1jkptt.fd 2007/01/26 Fontinst v1.928 font definitions for OT1/jkptt.
-)
-LaTeX Font Info:    Try loading font information for TS1+jkp on input line 265.
+) [1
 
-
-("C:\Users\mtkur\AppData\Local\Programs\MiKTeX 2.9\tex\latex\kpfonts\ts1jkp.fd"
-File: ts1jkp.fd 2007/08/30 Fontinst v1.928 font definitions for TS1/jkp.
-)
-Overfull \hbox (3.88133pt too wide) in paragraph at lines 326--327
-[]
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 328--329
-[]\OT1/jkp/m/n/8 We
- []
-
-[1
-
-{C:/Users/mtkur/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}] [2]
-("Stats 250 First Exam One Pager.aux") ) 
+{C:/Users/mtkur/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
+("Stats 250 Second Exam One Pager.aux") ) 
 Here is how much of TeX's memory you used:
- 28904 strings out of 492970
- 569381 string characters out of 3126593
- 850739 words of memory out of 3000000
- 32335 multiletter control sequences out of 15000+200000
- 570543 words of font info for 110 fonts, out of 3000000 for 9000
+ 28833 strings out of 492970
+ 568360 string characters out of 3126593
+ 826743 words of memory out of 3000000
+ 32274 multiletter control sequences out of 15000+200000
+ 559628 words of font info for 82 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 62i,17n,66p,830b,455s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:/Users/mtkur/AppData/Local/Programs/
-MiKTeX 2.9/fonts/enc/dvips/base/8r.enc}{C:/Users/mtkur/AppData/Local/Programs/M
-iKTeX 2.9/fonts/enc/dvips/kpfonts/kpfonts-expert.enc}<C:/Users/mtkur/AppData/Lo
-cal/Programs/MiKTeX 2.9/fonts/type1/public/kpfonts/jkpbsc8a.pfb><C:/Users/mtkur
-/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/kpfonts/jkpex.pfb><C:/Use
-rs/mtkur/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/kpfonts/jkpexa.pf
-b><C:/Users/mtkur/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/kpfonts/
-jkpmi.pfb><C:/Users/mtkur/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/
-kpfonts/jkpmit8a.pfb><C:/Users/mtkur/AppData/Local/Programs/MiKTeX 2.9/fonts/ty
-pe1/public/kpfonts/jkpmn8a.pfb><C:/Users/mtkur/AppData/Local/Programs/MiKTeX 2.
-9/fonts/type1/public/kpfonts/jkpmne.pfb><C:/Users/mtkur/AppData/Local/Programs/
-MiKTeX 2.9/fonts/type1/public/kpfonts/jkpmsc8a.pfb><C:/Users/mtkur/AppData/Loca
-l/Programs/MiKTeX 2.9/fonts/type1/public/kpfonts/jkpsy.pfb><C:/Users/mtkur/AppD
-ata/Local/Programs/MiKTeX 2.9/fonts/type1/public/kpfonts/jkpsyc.pfb><C:/Users/m
-tkur/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/kpfonts/jkpttmn8a.pfb
->
-Output written on "Stats 250 First Exam One Pager.pdf" (2 pages, 108023 bytes).
-
+ 62i,5n,66p,831b,296s stack positions out of 5000i,500n,10000p,200000b,50000s
+{C:/Users/mtkur/AppData/Local/Programs
+/MiKTeX 2.9/fonts/enc/dvips/base/8r.enc}<C:/Users/mtkur/AppData/Local/Programs/
+MiKTeX 2.9/fonts/type1/public/kpfonts/jkpbsc8a.pfb><C:/Users/mtkur/AppData/Loca
+l/Programs/MiKTeX 2.9/fonts/type1/public/kpfonts/jkpmit8a.pfb><C:/Users/mtkur/A
+ppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/kpfonts/jkpmn8a.pfb><C:/Use
+rs/mtkur/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/kpfonts/jkpmsc8a.
+pfb><C:/Users/mtkur/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/kpfont
+s/jkpttmn8a.pfb>
+Output written on "Stats 250 Second Exam One Pager.pdf" (1 page, 54924 bytes).
 PDF statistics:
- 58 PDF objects out of 1000 (max. 8388607)
+ 30 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 
