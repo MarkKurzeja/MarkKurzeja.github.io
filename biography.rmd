@@ -32,7 +32,7 @@ opts_knit$set(width=75)
 ![logo](https://raw.githubusercontent.com/MarkKurzeja/MarkKurzeja.github.io/master/logo.png)
 <h1>Stats with Confidence</h1>
 <p>*Got questions? With 99% confidence, we can help*</p>
-<p> [Main Page](./index.html) | [Bios](./biography.html)
+<p> [Main Page](./index.html) | [Bios](./biography.html) </p>
 <!-- <a href="https://facebook.com" class="btn btn-primary">CLICK</a> -->
 </center>
 </div>
@@ -41,12 +41,13 @@ opts_knit$set(width=75)
 <!-- Beginning of the content -->
 
 # Biography
-![photo](./mark_picture.jpeg)
 Who's behind the madness of Stats With Confidence?
 
 My name is Mark Kurzeja and I was a student at UofM who took Stats 250 in undergrad. I was a finance major and graduated with my BBA from Ross with minors in mathematics and computer science. I went to work in investment banking after graduation where I worked on a lot a lot of the products that blew up in 2008 (CLO's and Credit Derivatives) and then came back to UofM for my masters in Applied Statistics.
 
 I've taught statistics on Coursera (Statistics with Python) and I was a Lead GSI for Stats 250 while in Grad School. I am currently working at Google as a Software Engineer and I am happy to talk about my past or experiences as well!
+
+![photo](./mark_picture.jpeg)
 
 <!-- ========================= -->
 <!-- Google Analytics Script -->
