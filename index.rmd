@@ -40,7 +40,7 @@ opts_knit$set(width=75)
 <!-- Beginning of the content -->
 
 # *Who We Are and What We Do*
-It's Simple. You're in Stats 250. You're looking for some help. We are past instructors and GSIs to the course, looking to provide that help. 
+It's Simple. You're in Stats 250. You're looking for some help. We are past instructors and GSIs to the course, looking to provide that help. [See our bios here!](./biography.html)
 
 A lot of people have trouble with Stats 250 at the University of Michigan. The course is hard and sometimes there is a lot of work.  Stats with Confidence aims to make sure that you have everything that you need to do well in the course. 
 
