@@ -29,7 +29,7 @@ opts_knit$set(width=75)
 <div class="banner" style="padding:7px; text-align:center>
 <div class="banner-content">
 <center>
-![logo](https://raw.githubusercontent.com/MarkKurzeja/MarkKurzeja.github.io/master/logo.png)
+![](./logo.png)
 <h1>Stats with Confidence</h1>
 <p>*Got questions? With 99% confidence, we can help*</p>
 <p> [Main Page](./index.html) | [Bios](./biography.html) </p>
@@ -47,7 +47,7 @@ My name is Mark Kurzeja and I was a student at UofM who took Stats 250 in underg
 
 I've taught statistics on Coursera (Statistics with Python) and I was a Lead GSI for Stats 250 while in Grad School. I am currently working at Google as a Software Engineer and I am happy to talk about my past or experiences as well!
 
-![photo](./mark_picture.jpeg)
+![](./mark_picture.jpeg)
 
 <!-- ========================= -->
 <!-- Google Analytics Script -->

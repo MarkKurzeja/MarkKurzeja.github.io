@@ -29,7 +29,7 @@ opts_knit$set(width=75)
 <div class="banner" style="padding:7px; text-align:center>
 <div class="banner-content">
 <center>
-![logo](./logo.png)
+![](./logo.png)
 <h1>Stats with Confidence</h1>
 <p>*Got questions? With 99% confidence, we can help*</p>
 <p> [Main Page](./index.html) | [Bios](./biography.html) </p>
@@ -52,7 +52,7 @@ From free resources to one-on-one and online tutoring, Stats with Confidence is 
 **Shaq agrees**
 
 <center>
-![](https://raw.githubusercontent.com/MarkKurzeja/MarkKurzeja.github.io/master/shaq_stats.jpg)
+![](./shaq_stats.jpg)
 </center>
 
 
